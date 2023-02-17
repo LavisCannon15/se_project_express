@@ -7,17 +7,17 @@ const {createItem, getItems, updateItem, deleteItem} = require('../controllers/c
 
 
 //CREATE
-router.post('/', createItem)
+router.post('/items', createItem)
 
 //Read
-router.get('/', getItems)
+router.get('/items', getItems)
 
 //Update
-router.put('/:itemId', updateItem);
+router.put('/items/:itemId', updateItem);
 
 
 //Delete
-router.delete('/:itemId', deleteItem);
+router.delete('/items/:itemId', deleteItem);
 
 
 

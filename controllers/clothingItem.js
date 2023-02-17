@@ -11,8 +11,10 @@ const createItem = (req, res) => {
       console.log(item);
       res.send({ data: item });
     })
-    .catch((e) => {
-      res.status(500).send({ message: "Error: createItem failed", e });
+    .catch((err) => {
+      if (err.name == "ValidationError") {
+        res.status(ERR_CODE_400).send(err);
+      }
     });
 };
 
