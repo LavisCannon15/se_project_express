@@ -12,8 +12,8 @@ const createItem = (req, res) => {
       res.send({ data: item });
     })
     .catch((err) => {
-      if (err.name == "ValidationError") {
-        res.status(ERR_CODE_400).send(err);
+      if (err.name === "ValidationError") {
+        res.status(400).send(err);
       }
     });
 };
@@ -40,12 +40,28 @@ const updateItem = (req, res) => {
 
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
+
   ClothingItem.findByIdAndDelete(itemId)
     .orFail()
-    .then((item) => res.status(204).send({}))
-    .catch((e) => {
-      res.status(500).send({ message: "Error: updateItems failed", e });
+    .then(() => {
+      res.status(204).send({});
+    })
+    .catch((err) => {
+      if (err.name === "CastError") {
+        res.status(400).send({ message: "NotValid Data" });
+      } else if (err.message === "DocumentNotFoundError") {
+        res.status(404).send({ message: "Item not found" });
+      } else {
+        res
+          .status(500)
+          .send({ message: "An error has occurred on the server" });
+      }
     });
 };
 
-module.exports = { createItem, getItems, updateItem, deleteItem };
+module.exports = {
+  createItem,
+  getItems,
+  updateItem,
+  deleteItem,
+};
