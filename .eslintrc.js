@@ -7,7 +7,7 @@ module.exports = {
   extends: 'airbnb-base',
   overrides: [],
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 12,
   },
   rules: {
     'no-underscore-dangle': ['off', { allow: ['id'] }],
