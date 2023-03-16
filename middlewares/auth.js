@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+
 const { JWT_SECRET } = require("../utils/config");
 
 const ERR_CODE_401 = 401;
@@ -11,6 +12,8 @@ const auth = (req, res, next) => {
   }
 
   const token = authorization.replace("Bearer ", "");
+
+  
 
   let payload;
 

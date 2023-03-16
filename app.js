@@ -17,7 +17,7 @@ mongoose.connect(
 );
 */
 
-mongoose.connect("mongodb://localhost:27017/wtwr_db");
+mongoose.connect("mongodb://localhost:27017");
 
 const routes = require("./routes");
 const { createUser, login } = require("./controllers/users");
