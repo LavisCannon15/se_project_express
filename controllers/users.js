@@ -28,12 +28,16 @@ const createUser = (req, res) => {
         avatar,
       })
         .then((user) => {
-          res.status(ERR_CODE_201).send({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            avatar: user.avatar,
-          });
+          const token = jwt.sign({ _id: user._id }, JWT_SECRET, {expiresIn: "7d",});
+            res.status(ERR_CODE_201).send({
+              token: token,
+              user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+              },
+            });
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
