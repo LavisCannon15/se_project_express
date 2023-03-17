@@ -17,7 +17,8 @@ mongoose.connect(
 );
 */
 
-mongoose.connect("mongodb://localhost:27017/wtwr_db_lavis");
+//mongoose.connect("mongodb://localhost:27017/wtwr_db_lavis");
+mongoose.connect("mongodb://127.0.0.1:27017/wtwr_db_lavis");
 
 const routes = require("./routes");
 const { createUser, login } = require("./controllers/users");

@@ -41,7 +41,7 @@ const createUser = (req, res) => {
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            return res.status(ERR_CODE_400).send({ message: 'Invalid data' });
+            return res.status(ERR_CODE_400).send({ message: 'Invalid datas' });
           } if (err.code === ERR_CODE_11000) {
             return res
               .status(ERR_CODE_409)
@@ -65,14 +65,16 @@ const login = (req, res) => {
 };
 
 const getCurrentUser = (req, res) => {
-  const { _id } = req.user;
+  const { _id } = req.user._id;
 
+  
   User.findById(_id)
     .then((user) => {
       if (!user) {
         return res.status(ERR_CODE_404).send({ message: 'User not found' });
       }
       return res.status(ERR_CODE_200).send(user);
+
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -82,6 +84,7 @@ const getCurrentUser = (req, res) => {
         .status(ERR_CODE_500)
         .send({ message: 'An error has occurred on the server' });
     });
+    
 };
 
 const updateUser = (req, res) => {
