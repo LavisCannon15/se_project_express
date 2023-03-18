@@ -6,8 +6,8 @@ const { getCurrentUser, updateUser } = require('../controllers/users');
 
 const auth = require('../middlewares/auth');
 
-router.get('/users/me', auth, getCurrentUser);
+router.get('/me', auth, getCurrentUser);
 
-router.patch('/users/me', auth, updateUser);
+router.patch('/me', auth, updateUser);
 
 module.exports = router;

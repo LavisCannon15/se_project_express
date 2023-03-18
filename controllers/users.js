@@ -65,8 +65,8 @@ const login = (req, res) => {
 };
 
 const getCurrentUser = (req, res) => {
-  const { _id } = req.user._id;
-
+  
+  const _id = req.user._id;
   
   User.findById(_id)
     .then((user) => {

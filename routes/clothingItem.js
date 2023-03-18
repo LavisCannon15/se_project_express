@@ -11,18 +11,18 @@ const {
 // CRUD
 
 // CREATE
-router.post('/items', auth, createItem);
+router.post('/', auth, createItem);
 
 // Read
-router.get('/items', auth, getItems);
+router.get('/', auth, getItems);
 
 // Delete
-router.delete('/items/:itemId', auth, deleteItem);
+router.delete('/:itemId', auth, deleteItem);
 
 // Like
-router.put('/items/:itemId/likes', auth, likeItem);
+router.put('/:itemId/likes', auth, likeItem);
 
 // Dislike
-router.delete('/items/:itemId/likes', auth, unlikeItem);
+router.delete('/:itemId/likes', auth, unlikeItem);
 
 module.exports = router;
