@@ -1,13 +1,6 @@
-# WTWR (What to Wear?)
+# WTWR (What to Wear?): Back End
+The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
+## Running the Project
+`npm run start` — to launch the server 
 
-## About the project
-
-The idea of the application is pretty simple - we make a call to an API, which then responds with the daily weather forecast. We collect the weather data, process it, and then based on the forecast, we recommend suitable clothing to the user.
-
-## Links
-
-- [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
-
-## Link to back-end
-
-Server created with Express, [Repo here](https://github.com/LavisCannon15/se_project_express)
+`npm run dev` — to launch the server with the hot reload feature
