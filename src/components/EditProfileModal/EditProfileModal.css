@@ -1,0 +1,149 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../fonts/CabinetGrotesk-Medium.otf");
+}
+
+
+
+.modal__type-editProfileForm {
+  position: fixed;
+
+  bottom: 450px;
+
+  left: 472px;
+  right: 472px;
+
+  margin: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  z-index: 1;
+
+  visibility: hidden;
+
+  width: 496px;
+  height: 304px;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+
+.modal__form {
+  background: #ffffff;
+
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px 20px 20px 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+
+.modal__exit-button {
+  position: absolute;
+  background: transparent url(../../images/modal-exit-icon.svg) center no-repeat;
+
+  width: 16px;
+  height: 16px;
+
+  margin-left: 423px;
+  margin-right: 31px;
+  margin-top: 23px;
+
+  padding: 0;
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.modal__title {
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+
+  width: 137px;
+  height: 20px;
+
+  color: #000000;
+
+  margin: 0;
+
+  padding-top: 28px;
+  padding-bottom: 24px;
+}
+
+.modal__form-input-title {
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height, or 125% */
+
+  color: #000000;
+
+  margin: 0;
+
+  padding-bottom: 8px;
+}
+
+.modal__form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__form-input {
+  color: #000000;
+
+  border: none;
+
+  width: 440px;
+
+  border-bottom: 1px solid #000000;
+
+  margin-bottom: 24px;
+
+  padding-top: 0;
+  padding-bottom: 4px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.modal__submit-button {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+
+  width: 124px;
+  height: 36px;
+
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  margin-top: 32px;
+  margin-bottom: 36px;
+}

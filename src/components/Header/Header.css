@@ -1,0 +1,93 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../fonts/CabinetGrotesk-Medium.otf");
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #000000;
+
+  text-decoration: none;
+
+  padding-top: 32px;
+  padding-bottom: 28px;
+
+  width: 1360px;
+  height: 40px;
+
+  display: flex;
+  margin: auto;
+}
+
+.header__logo-date-location {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header__logo {
+  width: 89px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+}
+
+.header__date-location {
+  padding-left: 24px;
+
+  margin: 0;
+}
+
+.header__user-menu {
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+}
+
+.header__clothes-button {
+  padding-right: 20px;
+  margin: 0;
+
+  cursor: pointer;
+}
+
+.header__profile-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.header__user-info {
+  margin: 0;
+}
+
+.header__user-avatar {
+  padding-left: 12px;
+
+  width: 40px;
+  height: 40px;
+}
+
+.header__auth-menu {
+  cursor: pointer;
+
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+}
+
+.header__login-button {
+  padding-right: 20px;
+  margin: 0;
+
+  cursor: pointer;
+}
