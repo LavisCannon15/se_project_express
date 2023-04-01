@@ -28,16 +28,16 @@ const createUser = (req, res) => {
         avatar,
       })
         .then((user) => {
-          const token = jwt.sign({ _id: user._id }, JWT_SECRET, {expiresIn: "7d",});
-            res.status(ERR_CODE_201).send({
-              token: token,
-              user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                avatar: user.avatar,
-              },
-            });
+          const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+          res.status(ERR_CODE_201).send({
+            token,
+            user: {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar,
+            },
+          });
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
@@ -65,16 +65,14 @@ const login = (req, res) => {
 };
 
 const getCurrentUser = (req, res) => {
-  
-  const _id = req.user._id;
-  
+  const { _id } = req.user;
+
   User.findById(_id)
     .then((user) => {
       if (!user) {
         return res.status(ERR_CODE_404).send({ message: 'User not found' });
       }
       return res.status(ERR_CODE_200).send(user);
-
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -84,7 +82,6 @@ const getCurrentUser = (req, res) => {
         .status(ERR_CODE_500)
         .send({ message: 'An error has occurred on the server' });
     });
-    
 };
 
 const updateUser = (req, res) => {

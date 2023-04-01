@@ -1,26 +1,24 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = require("../utils/config");
+const { JWT_SECRET } = require('../utils/config');
 
 const ERR_CODE_401 = 401;
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    return res.status(ERR_CODE_401).send({ message: "Authorization required" });
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return res.status(ERR_CODE_401).send({ message: 'Authorization required' });
   }
 
-  const token = authorization.replace("Bearer ", "");
-
-  
+  const token = authorization.replace('Bearer ', '');
 
   let payload;
 
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return res.status(ERR_CODE_401).send({ message: "Authorization required" });
+    return res.status(ERR_CODE_401).send({ message: 'Authorization required' });
   }
   req.user = payload;
   return next();
