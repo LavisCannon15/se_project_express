@@ -1,29 +1,28 @@
-const { Joi, celebrate } = require("celebrate");
-const validator = require("validator");
-
+const { Joi, celebrate } = require('celebrate');
+const validator = require('validator');
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
   }
-  return helpers.error("string.uri");
-}; 
-
+  return helpers.error('string.uri');
+};
 
 const createItemValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30).messages({
-      "string.min": 'The minimum length of the "name" field is 2',
-      "string.max": 'The maximum length of the "name" field is 30',
-      "string.empty": 'The "name" field must be filled in',
-    }),
+    name: Joi.string().required().min(2).max(30)
+      .messages({
+        'string.min': 'The minimum length of the "name" field is 2',
+        'string.max': 'The maximum length of the "name" field is 30',
+        'string.empty': 'The "name" field must be filled in',
+      }),
 
     imageUrl: Joi.string().required().custom(validateURL).messages({
-      "string.empty": 'The "imageUrl" field must be filled in',
-      "string.uri": 'the "imageUrl" field must be a valid url',
+      'string.empty': 'The "imageUrl" field must be filled in',
+      'string.uri': 'the "imageUrl" field must be a valid url',
     }),
   }),
-}); 
+});
 
 const createUserValidation = celebrate({
   body: Joi.object().keys({
@@ -39,6 +38,23 @@ const createUserValidation = celebrate({
   }),
 });
 
+const updateUserValidation = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    avatar: Joi.string()
+      .uri()
+      .required()
+      .custom((value, helpers) => {
+        if (!validator.isURL(value)) {
+          return helpers.message("Invalid URL format");
+        }
+        return value;
+      }),
+  }),
+});
+
+
+
 
 const loginValidation = celebrate({
   body: Joi.object().keys({
@@ -53,27 +69,23 @@ const idValidation = celebrate({
   }),
 });
 
-
-
 const validateItemImage = celebrate({
   body: Joi.object().keys({
     imageUrl: Joi.string().required().custom(validateURL).messages({
-      "string.empty": 'The "imageUrl" field must be filled in',
-      "string.uri": 'the "imageUrl" field must be a valid url',
+      'string.empty': 'The "imageUrl" field must be filled in',
+      'string.uri': 'the "imageUrl" field must be a valid url',
     }),
   }),
 });
-
 
 const validateAvatar = celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().custom(validateURL).messages({
-      "string.empty": 'The "avatar" field must be filled in',
-      "string.uri": 'the "avatar" field must be a valid url',
+      'string.empty': 'The "avatar" field must be filled in',
+      'string.uri': 'the "avatar" field must be a valid url',
     }),
   }),
 });
-
 
 const validateId = celebrate({
   params: Joi.object().keys({
@@ -81,8 +93,13 @@ const validateId = celebrate({
   }),
 });
 
-
-
-
-
-module.exports ={ createItemValidation, createUserValidation, loginValidation, idValidation, validateItemImage, validateAvatar, validateId}
+module.exports = {
+  createItemValidation,
+  createUserValidation,
+  updateUserValidation,
+  loginValidation,
+  idValidation,
+  validateItemImage,
+  validateAvatar,
+  validateId,
+};

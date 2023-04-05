@@ -8,13 +8,14 @@ const {
   likeItem,
   unlikeItem,
 } = require('../controllers/clothingItem');
+const { createItemValidation } = require('../middlewares/validation');
 // CRUD
 
 // CREATE
-router.post('/', auth, createItem);
+router.post('/', auth, createItemValidation, createItem);
 
 // Read
-router.get('/', auth, getItems);
+router.get('/',  getItems);
 
 // Delete
 router.delete('/:itemId', auth, deleteItem);

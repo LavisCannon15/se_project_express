@@ -5,6 +5,17 @@ The back-end project is focused on creating a server for the WTWR application. Y
 
 `npm run dev` — to launch the server with the hot reload feature
 
+## Technologies and Techniques Used
+- Node.js
+- Express.js
+- MongoDB
+- JWT (JSON Web Tokens) for authentication
+- Joi and Celebrate for request validation
+- Bcrypt for password hashing
 
-## Link to domain
+
+
+##Link to domain
+
 http://wtwrlaviscannon.chickenkiller.com/#/
+
