@@ -18,7 +18,7 @@ const ERR_CODE_409 = 409;
 const ERR_CODE_500 = 500;
 const ERR_CODE_11000 = 11000;
 
-const createUser = (req, res) => {
+const createUser = (req, res, next) => {
   const {
     name, email, password, avatar,
   } = req.body;
@@ -33,9 +33,8 @@ const createUser = (req, res) => {
         avatar,
       })
         .then((user) => {
-          //const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+          // const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
           res.status(ERR_CODE_201).send({
-            token,
             user: {
               _id: user._id,
               name: user.name,
@@ -46,17 +45,17 @@ const createUser = (req, res) => {
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            //return res.status(ERR_CODE_400).send({ message: 'Invalid datas' });
-            next(new BadRequestError("Invalid data"));
+            // return res.status(ERR_CODE_400).send({ message: 'Invalid datas' });
+            return next(new BadRequestError('Invalid data'));
           } if (err.code === ERR_CODE_11000) {
-            //return res.status(ERR_CODE_409).send({ message: 'Email already exists' });
-            next(new ConflictError("Email already exists"));
+            // return res.status(ERR_CODE_409).send({ message: 'Email already exists' });
+            return next(new ConflictError('Email already exists'));
           }
-          //return res.status(ERR_CODE_500).send({ message: 'Server error' });
-          next(new ServerError("Server error"));
+          // return res.status(ERR_CODE_500).send({ message: 'Server error' });
+          next(new ServerError('Server error'));
         });
     })
-    .catch(() => next(new ServerError("Server error"))/*res.status(ERR_CODE_500).send({ message: 'An error has occurred on the server.' })*/);
+    .catch(() => next(new ServerError('Server error'))/* res.status(ERR_CODE_500).send({ message: 'An error has occurred on the server.' }) */);
 };
 
 const login = (req, res) => {
@@ -67,7 +66,7 @@ const login = (req, res) => {
         token: jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' }),
       });
     })
-    .catch(() => next(new UnauthorizedError("Login failed"))/*res.status(ERR_CODE_401).send({ message: 'Error: Login failed' })*/);
+    .catch(() => next(new UnauthorizedError('Login failed'))/* res.status(ERR_CODE_401).send({ message: 'Error: Login failed' }) */);
 };
 
 const getCurrentUser = (req, res) => {
@@ -76,18 +75,18 @@ const getCurrentUser = (req, res) => {
   User.findById(_id)
     .then((user) => {
       if (!user) {
-        //return res.status(ERR_CODE_404).send({ message: 'User not found' });
-        next(new NotFoundError("User not found"));
+        // return res.status(ERR_CODE_404).send({ message: 'User not found' });
+        return next(new NotFoundError('User not found'));
       }
       return res.status(ERR_CODE_200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        //return res.status(ERR_CODE_400).send({ message: 'NotValid Data' });
-        next(new BadRequestError("Not valid data"))
+        // return res.status(ERR_CODE_400).send({ message: 'NotValid Data' });
+        return next(new BadRequestError('Not valid data'));
       }
-      //return res.status(ERR_CODE_500).send({ message: 'An error has occurred on the server' });
-      next(new ServerError("An error has occured on the server"))
+      // return res.status(ERR_CODE_500).send({ message: 'An error has occurred on the server' });
+      next(new ServerError('An error has occured on the server'));
     });
 };
 
@@ -102,18 +101,18 @@ const updateUser = (req, res) => {
   )
     .then((updatedUser) => {
       if (!updatedUser) {
-        //return res.status(ERR_CODE_404).json({ message: 'User not found' });
-         next(new NotFoundError("User not found"));
+        // return res.status(ERR_CODE_404).json({ message: 'User not found' });
+        return next(new NotFoundError('User not found'));
       }
       return res.status(ERR_CODE_200).json(updatedUser);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        //return res.status(ERR_CODE_400).send({ message: 'Invalid data' });
-        next(new BadRequestError("Invalid data"));
+        // return res.status(ERR_CODE_400).send({ message: 'Invalid data' });
+        return next(new BadRequestError('Invalid data'));
       }
-      //return res.status(ERR_CODE_500).send({ message: 'Server error' });
-      next(new ServerError("An error has occured on the server"));
+      // return res.status(ERR_CODE_500).send({ message: 'Server error' });
+      next(new ServerError('An error has occured on the server'));
     });
 };
 

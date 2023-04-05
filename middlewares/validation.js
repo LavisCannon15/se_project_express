@@ -21,18 +21,23 @@ const createItemValidation = celebrate({
       'string.empty': 'The "imageUrl" field must be filled in',
       'string.uri': 'the "imageUrl" field must be a valid url',
     }),
+
+    weather: Joi.string().valid('hot', 'warm', 'cold'),
   }),
 });
 
 const createUserValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    avatar: Joi.string().uri().required().custom((value, helpers) => {
-      if (!validator.isURL(value)) {
-        return helpers.message('Invalid URL format');
-      }
-      return value;
-    }),
+    name: Joi.string().min(2).max(30).required(),
+    avatar: Joi.string()
+      .uri()
+      .required()
+      .custom((value, helpers) => {
+        if (!validator.isURL(value)) {
+          return helpers.message("Invalid URL format");
+        }
+        return value;
+      }),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
@@ -40,7 +45,7 @@ const createUserValidation = celebrate({
 
 const updateUserValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     avatar: Joi.string()
       .uri()
       .required()
@@ -53,9 +58,6 @@ const updateUserValidation = celebrate({
   }),
 });
 
-
-
-
 const loginValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
@@ -65,7 +67,7 @@ const loginValidation = celebrate({
 
 const idValidation = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().hex().length(24).required(),
+    itemId: Joi.string().hex().length(24).required(),
   }),
 });
 

@@ -1,15 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-
 const cors = require('cors');
 
-require("dotenv").config();
-
-
+require('dotenv').config();
 
 const { PORT = 3001 } = process.env;
-
 
 const app = express();
 
@@ -37,10 +33,7 @@ app.use(cors());
 
 app.use(express.json());
 
-
-
 app.use(requestLogger);
-
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -48,7 +41,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signup', createUserValidation ,createUser);
+app.post('/signup', createUserValidation, createUser);
 app.post('/signin', loginValidation, login);
 
 app.use(routes);
@@ -56,7 +49,6 @@ app.use(routes);
 app.use(errorHandler);
 app.use(errors());
 app.use(errorLogger);
-
 
 app.listen(PORT, () => {
   console.log(`App listening at port ${PORT}`);
