@@ -34,7 +34,7 @@ const createUserValidation = celebrate({
       .required()
       .custom((value, helpers) => {
         if (!validator.isURL(value)) {
-          return helpers.message("Invalid URL format");
+          return helpers.message('Invalid URL format');
         }
         return value;
       }),
@@ -51,7 +51,7 @@ const updateUserValidation = celebrate({
       .required()
       .custom((value, helpers) => {
         if (!validator.isURL(value)) {
-          return helpers.message("Invalid URL format");
+          return helpers.message('Invalid URL format');
         }
         return value;
       }),

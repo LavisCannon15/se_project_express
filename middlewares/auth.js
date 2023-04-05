@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET } = require('../utils/config');
+const { JWT_SECRET } = require('dotenv').config();
 const { UnauthorizedError } = require('./errors/UnauthorizedError');
 
-const ERR_CODE_401 = 401;
+// const ERR_CODE_401 = 401;
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;

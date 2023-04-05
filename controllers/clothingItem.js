@@ -6,9 +6,9 @@ const { NotFoundError } = require('../middlewares/errors/NotFoundError');
 const ClothingItem = require('../models/clothingItem');
 
 const ERR_CODE_200 = 200;
-const ERR_CODE_400 = 400;
-const ERR_CODE_403 = 403;
-const ERR_CODE_404 = 404;
+// const ERR_CODE_400 = 400;
+// const ERR_CODE_403 = 403;
+// const ERR_CODE_404 = 404;
 const ERR_CODE_500 = 500;
 
 const createItem = (req, res, next) => {
@@ -27,11 +27,9 @@ const createItem = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        // return res.status(ERR_CODE_400).send({ message: 'Invalid data' });
         return next(new BadRequestError('Invalid data'));
       }
-      // return res.status(ERR_CODE_500).send({ message: 'Server error' });
-      next(new ServerError('Server error'));
+      return next(new ServerError('Server error'));
     });
 };
 
@@ -47,14 +45,12 @@ const deleteItem = (req, res, next) => {
   ClothingItem.findById(itemId)
     .then((item) => {
       if (!item) {
-        // return res.status(ERR_CODE_404).send({ message: 'Item not found' });
         return next(new NotFoundError('Item not found'));
       }
       if (item.owner.equals(req.user._id)) {
         return item.remove(() => res.send({ clothingItem: item }));
       }
-      // return res.status(ERR_CODE_403).send({message: "You do not have permission to delete another user's item"});
-      next(
+      return next(
         new ForbiddenError(
           "You do not have permission to delete another user's item",
         ),
@@ -62,12 +58,10 @@ const deleteItem = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        // return res.status(ERR_CODE_400).send({ message: 'Invalid item ID' });
         return next(new BadRequestError('Invalid item ID'));
       }
       console.error(err);
-      // return res.status(ERR_CODE_500).send({ message: 'Server error' });
-      next(new ServerError('Server error'));
+      return next(new ServerError('Server error'));
     });
 };
 
@@ -81,18 +75,15 @@ const likeItem = (req, res, next) => {
   )
     .then((item) => {
       if (!item) {
-        // return res.status(ERR_CODE_404).send({ message: 'Item not found' });
         return next(new NotFoundError('Item not found'));
       }
       return res.status(ERR_CODE_200).send({ item });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        // return res.status(ERR_CODE_400).send({ message: 'Invalid ID' });
         return next(new BadRequestError('Invalid item ID'));
       }
-      // return res.status(ERR_CODE_500).send({ message: 'Error: getItems failed', err });
-      next(new ServerError('Error: getItems failed'));
+      return next(new ServerError('Error: getItems failed'));
     });
 };
 
@@ -106,14 +97,12 @@ const unlikeItem = (req, res, next) => {
   )
     .then((item) => {
       if (!item) {
-        // return res.status(ERR_CODE_404).send({ message: 'Item not found' });
         return next(new NotFoundError('Item not found'));
       }
       return res.status(ERR_CODE_200).send({ item });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        // return res.status(ERR_CODE_400).send({ message: 'Invalid ID' });
         return next(new BadRequestError('Invalid data'));
       }
       return res.status(ERR_CODE_500).send({ message: 'Error: getItems failed', err });
