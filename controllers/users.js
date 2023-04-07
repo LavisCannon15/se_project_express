@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('dotenv').config();
+
+const { JWT_SECRET = 'JWT_SECRET' } = process.env;
 const { BadRequestError } = require('../middlewares/errors/BadRequestError');
 const { ConflictError } = require('../middlewares/errors/ConflictError');
 const { NotFoundError } = require('../middlewares/errors/NotFoundError');

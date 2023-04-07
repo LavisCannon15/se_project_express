@@ -46,9 +46,9 @@ app.post('/signin', loginValidation, login);
 
 app.use(routes);
 
-app.use(errorHandler);
-app.use(errors());
 app.use(errorLogger);
+app.use(errors());
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening at port ${PORT}`);

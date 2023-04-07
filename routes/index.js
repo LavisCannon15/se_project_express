@@ -9,7 +9,7 @@ const users = require('./users');
 
 router.use('/items', clothingItem);
 router.use('/users', users);
-router.use(auth, (next) => {
+router.use(auth, (req, res, next) => {
   next(new NotFoundError('Item not found'));
 });
 
