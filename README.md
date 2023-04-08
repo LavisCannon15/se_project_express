@@ -17,5 +17,6 @@ The back-end project is focused on creating a server for the WTWR application. Y
 
 ## Link to domain
 
-https://wtwrlaviscannon.nullexistence.net/#/
+frontend: https://wtwrlaviscannon.nullexistence.net/#/
+backend: https://api.wtwrlaviscannon.nullexistence.net
 
